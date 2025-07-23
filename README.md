@@ -37,7 +37,7 @@ docker logs tsonly-container
 
 ## tsonlypow
 
-Implementation of simple blockchain with proof of work (to add a new block )
+Implementation of simple blockchain with proof of work (to add a new block)
 
 ```bash
 cd tsonlypow
@@ -58,3 +58,39 @@ docker build -t tsonlypow .
 docker run --name tsonlypow-container tsonlypow
 docker logs tsonlypow-container
 ```
+
+## browser
+
+Implementation of simple blockchain with PoW that runs in browser. Also you can run with node. `lib` folder contains blockchain logic.
+
+```bash
+cd browser
+```
+
+### Local
+
+#### Browser
+
+```bash
+npm run compileDeploy
+npm start
+```
+
+Open your browser at http://localhost:3000/
+
+#### Node
+
+```bash
+npm run compileDeploy
+node ./dist/node/main.js
+```
+
+### Docker
+
+```bash
+docker build -t browser .
+docker run -p 3000:3000 --name browser-container browser
+docker logs browser-container
+```
+
+Open your browser at http://localhost:3000/

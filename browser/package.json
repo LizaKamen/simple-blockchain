@@ -1,0 +1,21 @@
+{
+  "name": "browser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/node/main.js && serve dist/",
+    "compileDeploy": "tsc && npm run deploy",
+    "deploy": "copyfiles -f src/browser/*html src/browser/*.css dist"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "copyfiles": "^2.4.1",
+    "serve": "^14.2.4",
+    "typescript": "^5.8.3"
+  }
+}
