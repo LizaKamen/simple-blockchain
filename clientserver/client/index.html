@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple SignalR Client</title>
+    <!-- Подключаем SignalR клиентскую библиотеку -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+</head>
+<body>
+    <h1>SignalR Client</h1>
+    
+    <div>
+        <button id="requestNewBlock">Запросить блок</button>
+        <button id="announceNewBlock">Оповестить о блоке</button>
+    </div>
+    
+    <div>
+        <h3>Сообщения:</h3>
+        <ul id="messagesList"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consectetur orci pulvinar tortor egestas ornare sit amet non quam. In sollicitudin aliquet bibendum. Nunc in massa nulla. Phasellus aliquet lacus lorem, a lobortis tellus convallis vitae. Nulla eget egestas arcu. Quisque in turpis id nisi posuere tristique non vel erat. Maecenas sed porta elit, et iaculis felis. In maximus ex nec aliquam tempor. Maecenas nec pulvinar dolor, non ultricies elit. Donec sed ex finibus risus dictum porttitor vitae in enim. "
+            const loremArr = lorem.split(' ');
+            // Замените этот URL на адрес вашего SignalR хаба
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("http://localhost:5126/blockchainHub")
+                .configureLogging(signalR.LogLevel.Information)
+                .build();
+
+            const index = Math.floor(Math.random() * (loremArr.length + 1))
+            const id = loremArr[index]
+            console.log(id)
+
+            // Обработчик для получения сообщений от сервера
+            connection.on("RequestNewBlock", (user, message) => {
+                const li = document.createElement("li");
+                li.textContent = `${user}: ${message}`;
+                document.getElementById("messagesList").appendChild(li);
+            });
+
+            connection.on("AnnounceNewBlock", (user, message) => {
+                const li = document.createElement("li");
+                li.textContent = `${user}: ${message}`;
+                document.getElementById("messagesList").appendChild(li);
+            });
+
+            // Обработчик кнопки отправки
+            document.getElementById("requestNewBlock").addEventListener("click", async (e) => {
+                const message = "Requesting new block!";
+                try {
+                    await connection.invoke("RequestNewBlock", id, message);
+                    document.getElementById("messageInput").value = "";
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+
+            document.getElementById("announceNewBlock").addEventListener("click", async (e) => {
+                const message = "Announcing new block!";
+                try {
+                    // Вызываем метод на сервере
+                    await connection.invoke("RequestNewBlock", id, message);
+                    document.getElementById("messageInput").value = "";
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+
+            // Запускаем соединение
+            async function start() {
+                try {
+                    await connection.start();
+                    console.log("SignalR Connected.");
+                } catch (err) {
+                    console.log(err);
+                    setTimeout(start, 5000);
+                }
+            }
+
+            // Обработка разрыва соединения
+            connection.onclose(async () => {
+                await start();
+            });
+
+            // Запускаем соединение при загрузке страницы
+            start();
+        });
+    </script>
+</body>
+</html>
