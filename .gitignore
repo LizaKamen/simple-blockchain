@@ -13,7 +13,7 @@
 **/build/
 **/coverage/
 **/.cache/
-
+**/.vs/
 # Dependencies (ignore node_modules everywhere)
 **/node_modules/
 
