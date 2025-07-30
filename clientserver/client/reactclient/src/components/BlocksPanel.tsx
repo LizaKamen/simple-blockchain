@@ -26,7 +26,7 @@ const BlockComponent: React.FC<{ index: number; block: Block }> = ({
   index,
   block,
 }) => {
-  const formattedTransaction = formatTransactios(block.transactions);
+  const formattedTransaction = formatTransactions(block.transactions);
   const timestamp = new Date(block.timestamp).toLocaleTimeString();
 
   return (
@@ -53,7 +53,7 @@ const BlockComponent: React.FC<{ index: number; block: Block }> = ({
   );
 };
 
-function formatTransactios(transactions: Transaction[]): string {
+function formatTransactions(transactions: Transaction[]): string {
   return transactions
     .map((t) => `${t.sender} → ${t.recipient}: $${t.amount}`)
     .join("\n");
