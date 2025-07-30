@@ -1,20 +1,8 @@
+import type { Block } from "./block";
 import { sha256 } from "./cryptography";
+import type { Transaction } from "./Transaction";
 
 const HASH_REQUIREMENT = "0000";
-
-export interface Transaction {
-  readonly sender: string;
-  readonly recipient: string;
-  readonly amount: number;
-}
-
-export interface Block {
-  readonly hash: string;
-  readonly nonce: number;
-  readonly previousHash: string;
-  readonly timestamp: number;
-  readonly transactions: Transaction[];
-}
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type WithoutHash<T> = Omit<T, "hash">;
@@ -99,7 +87,6 @@ export class BlockchainNode {
       8
     )}" is rejected`;
 
-    // Find the block after which the new block should be added.
     const previousBlockIndex = this._chain.findIndex(
       (b) => b.hash === newBlock.previousHash
     );
@@ -112,8 +99,6 @@ export class BlockchainNode {
       );
     }
 
-    // The current node may already have one or more blocks generated (or received from other nodes in the network),
-    // after the one we attempt to add. In this case the longest chain takes precedence and the new block is rejected.
     const tail = this._chain.slice(previousBlockIndex + 1);
     if (tail.length >= 1) {
       throw new Error(
@@ -121,7 +106,6 @@ export class BlockchainNode {
       );
     }
 
-    // Verify the hash of the new block against the hash of the previous block.
     const newBlockHash = await this.calculateHash(newBlock);
     const prevBlockHash = this._chain[previousBlockIndex].hash;
     const newBlockValid =
@@ -132,7 +116,6 @@ export class BlockchainNode {
       throw new Error(`${errorMessagePrefix} - hash verification has failed.`);
     }
 
-    // Append the new block at the end of the chain.
     this._chain = [...this._chain, newBlock];
   }
 

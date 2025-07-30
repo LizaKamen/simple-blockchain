@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import type { Transaction } from "../lib/blockchain-node";
+import type { Transaction } from "../lib/Transaction";
 
 type TransactionFormProps = {
   onAddTransaction: (transaction: Transaction) => void;

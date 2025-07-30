@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import {
-  BlockchainNode,
-  type Block,
-  type Transaction,
-} from "../lib/blockchain-node";
 import TransactionForm from "./TransactionForm";
 import PendingTransactionsPanel from "./PendingTransactionsPanel";
 import BlocksPanel from "./BlocksPanel";
 import { MessageTypes, type Message } from "../lib/messages";
 import { SignalRController } from "../lib/signalr-controller";
+import { BlockchainNode } from "../lib/blockchain-node";
+import type { Transaction } from "../lib/Transaction";
+import type { Block } from "../lib/block";
 
 const server = new SignalRController();
 const node = new BlockchainNode();

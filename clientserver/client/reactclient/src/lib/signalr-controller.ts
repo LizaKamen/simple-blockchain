@@ -1,7 +1,8 @@
-import type { Block, Transaction } from "./blockchain-node";
+import type { Block } from "./block";
 import { uuid } from "./cryptography";
 import { type Message, MessageTypes, type UUID } from "./messages";
 import * as signalR from "@microsoft/signalr";
+import type { Transaction } from "./Transaction";
 
 interface PromiseExecutor<T> {
   resolve: (value: T | PromiseLike<T>) => void;
@@ -29,7 +30,6 @@ export class SignalRController {
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
-    // Настройка обработчиков сообщений
     this.connection.on("HandleMessage", (message: Message) => {
       this.onMessageReceived(message);
     });
