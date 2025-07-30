@@ -100,7 +100,7 @@ public class BlockchainHub : Hub
 
     private Message SelectTheLongestChain(Message currentlyLongest, Message current)
     {
-        return current.Payload.Length > currentlyLongest.Payload.Length ? current : currentlyLongest;
+        return current.Payload.ToString().Length > currentlyLongest.Payload.ToString().Length ? current : currentlyLongest;
     }
 
     // Track connected clients
