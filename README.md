@@ -94,3 +94,33 @@ docker logs browser-container
 ```
 
 Open your browser at http://localhost:3000/
+
+# clientserver
+
+Implementation using Vite + React on client side and ASP.NET + SignalR on server side
+
+```bash
+cd clientbrowser
+```
+
+## Docker
+
+```bash
+docker-compose up --build
+```
+
+Open your browser at http://localhost:3000/
+
+## Local
+
+```bash
+# run server
+cd server
+dotnet run
+# run client
+cd ..
+cd client/reactclient
+npm run dev
+```
+
+Open your browser at http://localhost:5173/

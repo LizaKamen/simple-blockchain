@@ -18,7 +18,7 @@ export class SignalRController {
   private messagesCallback!: (messages: Message) => void;
 
   private get url(): string {
-    return "http://localhost:5126/blockchainHub";
+    return import.meta.env.VITE_API_URL;
   }
 
   async connect(messagesCallback: (messages: Message) => void): Promise<void> {
