@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import type { Transaction } from "../lib/Transaction";
+import type { Transaction } from "../lib/transaction";
 
 type TransactionFormProps = {
   onAddTransaction: (transaction: Transaction) => void;

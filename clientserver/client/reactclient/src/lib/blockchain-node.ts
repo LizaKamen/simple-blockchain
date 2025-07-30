@@ -1,6 +1,6 @@
 import type { Block } from "./block";
 import { sha256 } from "./cryptography";
-import type { Transaction } from "./Transaction";
+import type { Transaction } from "./transaction";
 
 const HASH_REQUIREMENT = "0000";
 

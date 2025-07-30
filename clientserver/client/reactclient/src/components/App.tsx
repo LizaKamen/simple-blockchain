@@ -6,7 +6,7 @@ import BlocksPanel from "./BlocksPanel";
 import { MessageTypes, type Message } from "../lib/messages";
 import { SignalRController } from "../lib/signalr-controller";
 import { BlockchainNode } from "../lib/blockchain-node";
-import type { Transaction } from "../lib/Transaction";
+import type { Transaction } from "../lib/transaction";
 import type { Block } from "../lib/block";
 
 const server = new SignalRController();

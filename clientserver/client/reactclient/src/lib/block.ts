@@ -1,4 +1,4 @@
-import type { Transaction } from "./Transaction";
+import type { Transaction } from "./transaction";
 
 export interface Block {
   readonly hash: string;

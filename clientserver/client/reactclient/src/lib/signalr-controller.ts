@@ -2,7 +2,7 @@ import type { Block } from "./block";
 import { uuid } from "./cryptography";
 import { type Message, MessageTypes, type UUID } from "./messages";
 import * as signalR from "@microsoft/signalr";
-import type { Transaction } from "./Transaction";
+import type { Transaction } from "./transaction";
 
 interface PromiseExecutor<T> {
   resolve: (value: T | PromiseLike<T>) => void;

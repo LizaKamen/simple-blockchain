@@ -1,6 +1,6 @@
 import type React from "react";
 import type { Block } from "../lib/block";
-import type { Transaction } from "../lib/Transaction";
+import type { Transaction } from "../lib/transaction";
 
 type BlocksPanelProps = {
   blocks: Block[];
