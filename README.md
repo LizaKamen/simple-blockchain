@@ -113,6 +113,8 @@ Open your browser at http://localhost:3000/
 
 ## Local
 
+Create `.env` file with `VITE_API_URL=http://localhost:urport/blockchainHub`
+
 ```bash
 # run server
 cd server
